@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: sans-serif;
     background: #9B65E6;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
