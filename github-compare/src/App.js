@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
+import GlobalStyle from './styles/global';
 
-class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<h1>Ola mundo</h1>
-			</div>
-		);
-	}
-}
+import Main from './pages/Main';
+const App = () => (
+	<Fragment>
+		<GlobalStyle />
+		<Main />
+	</Fragment>
+);
 
 export default App;
