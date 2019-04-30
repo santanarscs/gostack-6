@@ -1,0 +1,20 @@
+.card-header {
+	padding: 10px 0;
+	border-bottom: 1px solid #ecf0f1;
+	margin-bottom: 20px;
+	display: flex;
+	.img-header img {
+		border-radius: 50px;
+		width: 56px;
+		height: 56px;
+		margin-right: 10px;
+	}
+	.description-header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		span {
+			color: #bdc3c7;
+		}
+	}
+}
