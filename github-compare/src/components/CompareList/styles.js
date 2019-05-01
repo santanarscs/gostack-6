@@ -50,3 +50,29 @@ export const Repository = styled.div`
     }
   }
 `;
+
+export const Footer = styled.div`
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    width: 80px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 20px 0;
+  }
+  .refresh {
+    background: #63f5b0;
+    &:hover {
+      background: #52d89f;
+    }
+  }
+  .remove {
+    background: #f00;
+    &:hover {
+      background: #c0392b;
+    }
+  }
+`;

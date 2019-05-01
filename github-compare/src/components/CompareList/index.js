@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Container, Repository } from "./styles";
+import { Container, Repository, Footer } from "./styles";
 const CompareList = ({ repositories }) => (
   <Container>
     {repositories.map(repository => (
@@ -25,6 +25,14 @@ const CompareList = ({ repositories }) => (
             {repository.lastCommit} <small>last commit</small>
           </li>
         </ul>
+        <Footer>
+          <button type="button" className="refresh">
+            <i className="fa fa-refresh" />
+          </button>
+          <button type="button" className="remove">
+            <i className="fa fa-times" />
+          </button>
+        </Footer>
       </Repository>
     ))}
   </Container>
