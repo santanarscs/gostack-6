@@ -40,6 +40,37 @@ export default class Main extends Component {
       this.setState({ loading: false });
     }
   };
+  handleRemoveRepository = async (id) => {
+    const { repositories } = this.state;
+
+    const updatedRepositories = repositories.filter(repository => repository.id !== id);
+
+    this.setState({ repositories: updatedRepositories });
+
+    await localStorage.setItem('@GitCompare:repositories', JSON.stringify(updatedRepositories));
+  };
+
+  handleUpdateRepository = async (id) => {
+    const { repositories } = this.state;
+
+    const repository = repositories.find(repo => repo.id === id);
+
+    try {
+      const { data } = await api.get(`/repos/${repository.full_name}`);
+
+      data.last_commit = moment(data.pushed_at).fromNow();
+
+      this.setState({
+        repositoryError: false,
+        repositoryInput: '',
+        repositories: repositories.map(repo => (repo.id === data.id ? data : repo)),
+      });
+
+      await localStorage.setItem('@GitCompare:repositories', JSON.stringify(repositories));
+    } catch (err) {
+      this.setState({ repositoryError: true });
+    }
+  };
 
   render() {
     return (
@@ -63,7 +94,8 @@ export default class Main extends Component {
             )}
           </button>
         </Form>
-        <CompareList repositories={this.state.repositories} />
+        <CompareList removeRepository={this.handleRemoveRepository}
+          updateRepository={this.handleUpdateRepository} repositories={this.state.repositories} />
       </Container>
     );
   }
