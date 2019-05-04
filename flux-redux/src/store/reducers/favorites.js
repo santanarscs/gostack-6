@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   loading: false,
-  data: []
+  data: [],
+  error: null
 };
 function favorites(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -10,8 +11,11 @@ function favorites(state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: false,
+        error: null,
         data: [...state.data, action.payload.data]
       };
+    case "ADD_FAVORITE_FAILURE":
+      return { ...state, loading: false, error: action.payload.error };
     default:
       return state;
   }
