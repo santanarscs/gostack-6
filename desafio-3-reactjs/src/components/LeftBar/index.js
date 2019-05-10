@@ -43,7 +43,7 @@ const LeftBar = ({ users, removeUser }) => (
 
 LeftBar.propTypes = {
   users: PropTypes.shape({}).isRequired,
-  removeUser: PropTypes.func.isRequired
+  removeUser: PropTypes.func
 };
 
 const mapStateToProps = state => ({

@@ -12,7 +12,7 @@ import Routes from "./routes";
 
 import "font-awesome/css/font-awesome.css";
 import "./styles.css";
-
+console.tron.log("testando");
 dotenv.config();
 
 const App = () => (

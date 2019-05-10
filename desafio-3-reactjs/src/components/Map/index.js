@@ -12,13 +12,22 @@ class Map extends Component {
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
-      latitude: -23.5439948,
-      longitude: -46.6065452,
-      zoom: 14
+      zoom: 15
     }
   };
 
   componentDidMount() {
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const { latitude, longitude } = coords;
+      console.log(coords);
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          latitude,
+          longitude
+        }
+      });
+    });
     window.addEventListener("resize", this._resize);
     this._resize();
   }
@@ -48,7 +57,7 @@ class Map extends Component {
     const { users } = this.props;
     return (
       <MapGL
-        {...this.state.viewport}
+        {...viewportState}
         onClick={this.handleMapClick}
         mapStyle="mapbox://styles/mapbox/basic-v9"
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOXACCESSTOKEN}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import modal from "react-modal";
+import Modal from "react-modal";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -9,15 +9,14 @@ import { Creators as ModalActions } from "../../store/ducks/modal";
 import { Creators as UsersActions } from "../../store/ducks/users";
 
 import "./styles.css";
-import Modal from "react-modal/lib/components/Modal";
 
 Modal.setAppElement(document.getElementById("root"));
 
-class Adduser extends Component {
-  static porpTypes = {
+class AddUser extends Component {
+  static propTypes = {
     modal: PropTypes.shape({
       visible: PropTypes.bool,
-      error: PropTypes.oneOfType([PropTypes.oneOf(null), PropTypes.string]),
+      error: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
       cordinates: PropTypes.oneOfType([
         PropTypes.oneOf([null]),
         PropTypes.shape({
@@ -30,16 +29,20 @@ class Adduser extends Component {
     hideModal: PropTypes.func.isRequired,
     addUserRequest: PropTypes.func.isRequired
   };
-  state = {
-    userinput: ""
-  };
-  handleInputChange = e => this.setState({ userIntpu: e.target.value });
 
-  hadleFormSubmit = e => {
+  state = {
+    userInput: ""
+  };
+
+  handleInputChange = e => this.setState({ userInput: e.target.value });
+
+  handleFormSubmit = e => {
     e.preventDefault();
 
     const { loading } = this.props;
+
     if (loading) return;
+
     const { userInput } = this.state;
 
     if (!userInput) return;
@@ -48,14 +51,17 @@ class Adduser extends Component {
       addUserRequest,
       modal: { cordinates }
     } = this.props;
+
     addUserRequest(userInput, cordinates);
     this.setState({ userInput: "" });
   };
+
   handleHideModal = () => {
     const { hideModal } = this.props;
     hideModal();
     this.setState({ userInput: "" });
   };
+
   render() {
     const { modal, loading } = this.props;
     const { userInput } = this.state;
@@ -87,14 +93,16 @@ class Adduser extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
   modal: state.modal,
   loading: state.users.loading
 });
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...ModalActions, ...UsersActions }, dispatch);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Adduser);
+)(AddUser);
