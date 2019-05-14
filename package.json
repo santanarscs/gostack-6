@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@adonisjs/cli": "^4.0.12",
-    "global": "^4.3.2"
-  }
-}
