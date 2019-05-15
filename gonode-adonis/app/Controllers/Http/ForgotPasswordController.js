@@ -1,7 +1,8 @@
 'use strict'
 const crypto = require('crypto')
 const User = use('App/Models/User')
-class ForgoutPasswordController {
+const Mail = use('Mail')
+class ForgotPasswordController {
   async store ({ request, response }) {
     try {
       const email = request.input('email')
@@ -10,6 +11,20 @@ class ForgoutPasswordController {
       user.token_created_at = new Date()
 
       await user.save()
+      await Mail.send(
+        ['emails.forgot_password'],
+        {
+          email,
+          token: user.token,
+          link: `${request.input('redirect_url')}?token=${user.token}`
+        },
+        message => {
+          message
+            .to(user.email)
+            .from('raphaelstn@gmail.com', 'Raphael Santana')
+            .subject('Recuperação de Senha')
+        }
+      )
     } catch (err) {
       response
         .status(err.status)
@@ -18,4 +33,4 @@ class ForgoutPasswordController {
   }
 }
 
-module.exports = ForgoutPasswordController
+module.exports = ForgotPasswordController
