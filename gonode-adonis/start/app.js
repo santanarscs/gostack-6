@@ -19,7 +19,9 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/framework/providers/ViewProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
-  '@adonisjs/antl/providers/AntlProvider'
+  '@adonisjs/antl/providers/AntlProvider',
+  '@adonisjs/redis/providers/RedisProvider',
+  'adonis-kue/providers/KueProvider'
 ]
 
 /*
@@ -31,7 +33,10 @@ const providers = [
 | Providers for migrations, tests etc.
 |
 */
-const aceProviders = ['@adonisjs/lucid/providers/MigrationsProvider']
+const aceProviders = [
+  '@adonisjs/lucid/providers/MigrationsProvider',
+  'adonis-kue/providers/CommandsProvider'
+]
 
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +61,14 @@ const aliases = {}
 |
 */
 const commands = []
+/*
+|--------------------------------------------------------------------------
+| Jobs
+|--------------------------------------------------------------------------
+|
+| Here you store your queue jobs
+|
+*/
+const jobs = ['App/Jobs/NewTaskMail']
 
-module.exports = { providers, aceProviders, aliases, commands }
+module.exports = { providers, aceProviders, aliases, commands, jobs }
