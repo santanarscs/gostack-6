@@ -5,7 +5,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
 
-const config = require("../../config/database.json");
+const config = require("../../config/database.js");
 const db = {};
 
 const sequelize = new Sequelize(
