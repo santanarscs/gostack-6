@@ -7,7 +7,7 @@ export default function browse() {
     <Container>
       <Title>Navegar</Title>
       <List>
-        <Playlist href="">
+        <Playlist to="/playlists/1">
           <img
             src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
             alt="teste"
@@ -18,7 +18,7 @@ export default function browse() {
             mundial
           </p>
         </Playlist>
-        <Playlist href="">
+        <Playlist to="/playlists/1">
           <img
             src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
             alt="teste"
@@ -29,7 +29,7 @@ export default function browse() {
             mundial
           </p>
         </Playlist>
-        <Playlist href="">
+        <Playlist to="/playlists/1">
           <img
             src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
             alt="teste"
@@ -40,7 +40,7 @@ export default function browse() {
             mundial
           </p>
         </Playlist>
-        <Playlist href="">
+        <Playlist to="/playlists/1">
           <img
             src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
             alt="teste"
