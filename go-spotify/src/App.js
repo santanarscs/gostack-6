@@ -1,10 +1,21 @@
 import React from "react";
-import "./styles/global";
+import "rc-slider/assets/index.css";
+import "./styles/styles.css";
+import Sidebar from "./components/Sidebar";
+import Player from "./components/Player";
+import Header from "./components/Header";
+import { Wrapper, Container, Content } from "./styles/components";
 function App() {
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-    </div>
+    <Wrapper>
+      <Container>
+        <Sidebar />
+        <Content>
+          <Header />
+        </Content>
+      </Container>
+      <Player />
+    </Wrapper>
   );
 }
 
