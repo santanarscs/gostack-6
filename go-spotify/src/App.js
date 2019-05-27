@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import "./config/reactotron";
 import "rc-slider/assets/index.css";
 import "./styles/styles.css";
 import Sidebar from "./components/Sidebar";

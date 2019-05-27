@@ -1,8 +1,8 @@
 import React from "react";
-
 import { Container, Header, SongList } from "./styles";
 import ClockIcon from "../../assets/images/clock.svg";
 import PlusIcon from "../../assets/images/plus.svg";
+
 export default function playlist() {
   return (
     <Container>
