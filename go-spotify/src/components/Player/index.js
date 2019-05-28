@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Slider from "rc-slider";
 import Sound from "react-sound";
 import PropTypes from "prop-types";
@@ -28,14 +28,18 @@ function Player({ player }) {
         <Sound url={player.currentSong.file} playStatus={player.status} />
       )}
       <Current>
-        <img
-          src="https://blog.spoongraphics.co.uk/wp-content/uploads/2017/01/thumbnail-2.jpg"
-          alt="teste"
-        />
-        <div>
-          <span>Tmes like these</span>
-          <small>Foo Fighters</small>
-        </div>
+        {!!player.currentSong && (
+          <Fragment>
+            <img
+              src={player.currentSong.thumbnail}
+              alt={player.currentSong.title}
+            />
+            <div>
+              <span>{player.currentSong.title}</span>
+              <small>{player.currentSong.author}</small>
+            </div>
+          </Fragment>
+        )}
       </Current>
       <Progress>
         <Controls>
@@ -85,6 +89,9 @@ function Player({ player }) {
 Player.propTypes = {
   player: PropTypes.shape({
     currentSong: PropTypes.shape({
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+      author: PropTypes.string,
       file: PropTypes.string
     }),
     status: PropTypes.string
