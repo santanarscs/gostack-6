@@ -3,6 +3,8 @@ import Slider from "rc-slider";
 import Sound from "react-sound";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Creators as PlayerActions } from "../../store/ducks/player";
+import { bindActionCreators } from "redux";
 import {
   Container,
   Current,
@@ -21,7 +23,7 @@ import PauseIcon from "../../assets/images/pause.svg";
 
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
-function Player({ player }) {
+function Player({ player, playSong, pauseSong }) {
   return (
     <Container>
       {!!player.currentSong && (
@@ -49,12 +51,15 @@ function Player({ player }) {
           <button>
             <img src={BackwardIcon} alt="backward" />
           </button>
-          <button>
-            <img src={PlayIcon} alt="play" />
-          </button>
-          {/* <button>
-            <img src={PauseIcon} alt="pause" />
-          </button> */}
+          {!!player.currentSong && player.status === Sound.status.PLAYING ? (
+            <button onClick={pauseSong}>
+              <img src={PauseIcon} alt="Pause" />
+            </button>
+          ) : (
+            <button onClick={playSong}>
+              <img src={PlayIcon} alt="Play" />
+            </button>
+          )}
           <button>
             <img src={ForwardIcon} alt="forward" />
           </button>
@@ -95,11 +100,17 @@ Player.propTypes = {
       file: PropTypes.string
     }),
     status: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  playSong: PropTypes.func.isRequired,
+  pauseSong: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   player: state.player
 });
-
-export default connect(mapStateToProps)(Player);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlayerActions, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
