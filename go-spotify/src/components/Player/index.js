@@ -23,7 +23,16 @@ import PauseIcon from "../../assets/images/pause.svg";
 
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
-function Player({ player, playSong, pauseSong, nextSong, prevSong }) {
+function Player({
+  player,
+  playSong,
+  pauseSong,
+  nextSong,
+  prevSong,
+  playing,
+  position,
+  duration
+}) {
   return (
     <Container>
       {!!player.currentSong && (
@@ -31,6 +40,7 @@ function Player({ player, playSong, pauseSong, nextSong, prevSong }) {
           url={player.currentSong.file}
           playStatus={player.status}
           onFinishedPlaying={nextSong}
+          onPlaying={playing}
         />
       )}
       <Current>
@@ -72,7 +82,7 @@ function Player({ player, playSong, pauseSong, nextSong, prevSong }) {
           </button>
         </Controls>
         <Time>
-          <span>1:38</span>
+          <span>{position}</span>
           <ProgressSlider>
             <Slider
               railStyle={{ background: "#404040", borderRadius: 10 }}
@@ -80,7 +90,7 @@ function Player({ player, playSong, pauseSong, nextSong, prevSong }) {
               handleStyle={{ border: 0 }}
             />
           </ProgressSlider>
-          <span>4:23</span>
+          <span>{duration}</span>
         </Time>
       </Progress>
       <Volume>
@@ -108,11 +118,24 @@ Player.propTypes = {
   playSong: PropTypes.func.isRequired,
   pauseSong: PropTypes.func.isRequired,
   nextSong: PropTypes.func.isRequired,
-  prevSong: PropTypes.func.isRequired
+  prevSong: PropTypes.func.isRequired,
+  playing: PropTypes.func.isRequired,
+  position: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired
 };
+function msToTime(duration) {
+  let seconds = parseInt((duration / 1000) % 60, 10);
+  const minutes = parseInt((duration / (1000 * 60)) % 60, 10);
+
+  seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${minutes}:${seconds}`;
+}
 
 const mapStateToProps = state => ({
-  player: state.player
+  player: state.player,
+  position: msToTime(state.player.position),
+  duration: msToTime(state.player.duration)
 });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(PlayerActions, dispatch);
